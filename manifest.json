@@ -1,0 +1,20 @@
+{
+	"name": "IPCloak",
+	"version": "1.0.0",
+	"manifest_version": 3,
+	"description": "IPFuck if it was real",
+	"action": {
+		"default_popup": "popup.html"
+	},
+	"background": {
+		"service_worker": "background.js"
+	},
+	"permissions": [
+		"storage",
+		"declarativeNetRequest",
+		"alarms"
+	],
+	"host_permissions": [
+		"<all_urls>"
+	]
+}

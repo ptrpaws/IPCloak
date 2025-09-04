@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+    <title>IPCloak</title>
+    <style>
+      body { min-width: 450px; overflow-x: hidden; font-family: sans-serif; }
+      fieldset {margin-top: 10px; border: 1px solid #ccc; padding: 10px; }
+      #status-display { text-align: center; }
+      #current-ip { font-weight: bold; color: #005a9c; }
+      #next-rotation { font-style: italic; color: #555; }
+      #rotate-now-btn { margin-top: 5px; }
+      .header-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+      textarea, input[type="text"], select { width: 95%; }
+      input[type="submit"] { margin-top: 10px; }
+    </style>
+  </head>
+  <body>
+    <h2>IPCloak</h2>
+    <form id="form">
+      <label><input type="checkbox" id="enabled" />
+      Enable IPCloak</label>
+      <fieldset id="status-display">
+        <legend>Status</legend>
+        <div>Current IP: <span id="current-ip">Loading...</span></div>
+        <div id="next-rotation"></div>
+        <button type="button" id="rotate-now-btn">Rotate Now</button>
+      </fieldset>
+      <fieldset>
+        <legend>IP Rotation</legend>
+        <select id="rotation-behavior">
+          <option value="0">Rotate IP only on Save/Apply</option>
+          <option value="1">Rotate IP every 1 minute</option>
+          <option value="5">Rotate IP every 5 minutes</option>
+          <option value="15">Rotate IP every 15 minutes</option>
+          <option value="60">Rotate IP every 60 minutes</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <legend>Headers to overwrite</legend>
+        <div class="header-columns">
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Behaviour</legend>
+        <label><input type="radio" name="behaviour" value="range" /> Random IP within a range</label><br />
+        <label><input type="radio" name="behaviour" value="list" /> Selected IPs from a list</label><br />
+        <label><input type="radio" name="behaviour" value="manual" /> Use a specific, manual IP</label>
+      </fieldset>
+      <fieldset id="fieldset-range">
+        <legend>IP range</legend>
+        From: <input type="text" id="ip-range-from" pattern="^\d{1,3}(\.\d{1,3}){3}$" required /><br />
+        To: &nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="ip-range-to" pattern="^\d{1,3}(\.\d{1,3}){3}$" required />
+      </fieldset>
+      <fieldset id="fieldset-list">
+        <legend>IP list (one IP per line)</legend>
+        <textarea id="ip-list" rows="5"></textarea>
+      </fieldset>
+      <fieldset id="fieldset-manual">
+        <legend>Manual IP</legend>
+        <input type="text" id="manual-ip" required />
+      </fieldset>
+      <fieldset>
+        <legend>Whitelist Domains (one per line)</legend>
+        <textarea id="whitelist" rows="5"></textarea>
+      </fieldset>
+      <input type="submit" value="Save & Apply" />
+      <p id="status-message" style="color: green;"></p>
+    </form>
+    <p style="text-align: right">
+      <a id="reset-config" href="#">Reset to default settings</a>
+    </p>
+    <script src="popup.js"></script>
+  </body>
+</html>
